@@ -14,7 +14,7 @@ namespace ConferenceTracker.Controllers
         private readonly ISpeakerRepository _speakerRepository;
         private readonly ILogger _logger;
 
-        public PresentationsController(IPresentationRepository presentationRepository, ISpeakerRepository speakerRepository, ILogger logger)
+        public PresentationsController(IPresentationRepository presentationRepository, ISpeakerRepository speakerRepository, ILogger<PresentationsController> logger)
         {
             _presentationRepository = presentationRepository;
             _speakerRepository = speakerRepository;
@@ -82,7 +82,7 @@ namespace ConferenceTracker.Controllers
                 return NotFound();
             }
 
-            _logger.LogInformation("Presentation id," + id + ", was found. Returning 'Edit view');
+            _logger.LogInformation("Presentation id," + id + ", was found. Returning 'Edit view'");
 
             ViewData["SpeakerId"] = new SelectList(_speakerRepository.GetAllSpeakers(), "Id", "Id", presentation?.SpeakerId);
             return View(presentation);
